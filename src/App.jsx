@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
@@ -8,6 +8,8 @@ import VisionMission from './pages/VisionMission'
 import ProductsServices from './pages/ProductsServices'
 
 export default function App() {
+  const location = useLocation()
+
   const initialTheme = useMemo(() => {
     const saved = localStorage.getItem('lwu-theme')
     if (saved === 'dark' || saved === 'light') return saved
@@ -29,12 +31,14 @@ export default function App() {
     <div className="app-root">
       <Header theme={theme} onToggleTheme={toggleTheme} />
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/vision-mission" element={<VisionMission />} />
-          <Route path="/products-services" element={<ProductsServices />} />
-        </Routes>
+        <div key={location.pathname} className="route-view">
+          <Routes location={location}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/vision-mission" element={<VisionMission />} />
+            <Route path="/products-services" element={<ProductsServices />} />
+          </Routes>
+        </div>
       </main>
       <Footer />
     </div>

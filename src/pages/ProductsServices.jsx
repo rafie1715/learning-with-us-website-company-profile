@@ -10,10 +10,10 @@ const products = [
 export default function ProductsServices() {
   return (
     <section className="container page products">
-      <h2>Products & Services</h2>
+      <h2 className="reveal" style={{ transitionDelay: '0ms' }}>Products & Services</h2>
       <div className="grid">
-        {products.map((p) => (
-          <div className="card" key={p.title}>
+        {products.map((p, index) => (
+          <div className="card reveal" style={{ transitionDelay: `${index * 110}ms` }} key={p.title}>
             <h3>{p.title}</h3>
             <p>{p.desc}</p>
             <a className="btn" href="https://linktr.ee/lwuid?utm_source=linktree_profile_share&ltsid=89c905a2-ab3b-476f-bc6b-ab94dc1cc4f4" target="_blank" rel="noreferrer">Contact Us</a>
